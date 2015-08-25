@@ -2,28 +2,52 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: Merriweather, sans-serif;
-  color: #545252;
-  padding: 20px;
-  max-width: 750px;
-  margin: 0 auto;
-  line-height: (5px * 5);
-  @media (min-width: 500px) {
-    line-height: 5vw;
+.cf() {
+  &:before,
+  &:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
   }
-  @media (min-width: 950px) {
-    line-height: (9.5px * 5);
+
+  &:after {
+      clear: both;
   }
 }
 
-button {
+html, body, #app {height: 100%;}
+
+body {
+  margin: 0;
+  font-family: Merriweather, sans-serif;
+  color: #545252;
+  line-height: 1.8;
+  // line-height: (5px * 5);
+  // @media (min-width: 500px) {
+  //   line-height: 5vw;
+  // }
+  // @media (min-width: 950px) {
+  //   line-height: (9.5px * 5);
+  // }
+}
+
+*[hidden] {
+  display: none !important;
+}
+
+@import '../node_modules/react-markdocs/src/markdocs';
+
+button,
+.btn {
+  font-family: inherit;
   border: none;
-  padding: 10px;
+  padding: 10px 20px;
   background: #69A0FC;
   color: white;
   border-radius: 3px;
   font-size: inherit;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0px 2px 0px darken(#69A0FC, 10%);
 }
 
 label {
@@ -34,32 +58,115 @@ label {
 
 input {
   font-size: inherit;
-  border: 1px solid #999;
+  border: 1px solid #DDD;
+  border-radius: 3px;
+  margin-top: 5px;
   padding: 5px;
-  &[type="text"],
-  &[type="number"] {
+}
+
+/*********************************************************
+* Color demo
+*/
+
+.container {
+  height: 100%;
+  display: flex;
+  pre[class*=language-] {
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+  }
+  pre[class*=language-]+pre[class*=language-]{
+    margin-top: 20px;
+  }
+  > div {
+    height: 100%;
+    overflow-y: auto;
+  }
+  > .preview {
+    flex-grow: 1;
+  }
+}
+
+/*********************************************************
+* Download footer
+*/
+.download {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: #69A0FC;
+  height: 60px;
+  padding: 5px;
+  flex-shrink: 0;
+  font-weight: inherit;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  span {
+    flex-grow: 1;
+  }
+  a:not(.btn) {
+    color: inherit;
+    &:hover {
+      color: #FFB400;
+    }
+  }
+  .btn {
+    font-size: 14px;
+    background: white;
+    color: #69A0FC;
+  }
+}
+
+
+/*********************************************************
+* Sidebar
+*/
+
+.sidebar {
+  padding: 30px;
+  width: 500px;
+  flex-shrink: 0;
+  line-height: 1.5;
+}
+.color-wrapper {
+  margin-right: -2%;
+  .cf;
+}
+.color {
+  float: left;
+  width: 45%;
+  margin-right: 5%;
+  margin-bottom: 20px;
+  input {
     width: 100%;
   }
 }
 
-textarea {
-  font-size: inherit;
-  width: 300px;
-  height: 100px;
-  border: 1px solid #999;
-}
 
-.form-group {
-  margin-bottom: 15px;
-}
-
-.errors {
+/*********************************************************
+* Preview
+*/
+.color-demo {
+  input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
   border-radius: 3px;
-  margin-bottom: 5px;
-  margin-top: 5px;
-  padding: 10px;
-  background: #FF7C7C;
-  color: white;
+  position: relative;
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
 }
 
 /*********************************************************

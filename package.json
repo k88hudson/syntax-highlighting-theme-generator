@@ -21,6 +21,7 @@
   "author": "k88hudson",
   "license": "MPL-2.0",
   "dependencies": {
+    "lodash.throttle": "^3.0.4",
     "react": "^0.13.3",
     "react-markdocs": "https://github.com/k88hudson/react-markdocs.git",
     "typeset": "https://github.com/k88hudson/Typeset.git"
