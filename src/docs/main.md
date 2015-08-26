@@ -7,12 +7,11 @@ Just edit the values on the left and press the **Download CSS** button when you'
 
 *Currently this tool only supports syntax highlighting for [Prism.js](http://prismjs.com), but I'm planning to add more in the near future.*
 
-
 ## <span id="examples">Examples</span>
 
 ### Inline code
 
-This is some `inline code` in a paragraph.
+This is some <code class="language-javascript">inline code</code> in a paragraph.
 
 ### React JSX with line highlighting
 
