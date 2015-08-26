@@ -1,3 +1,5 @@
+@sidebarBg: #282A36;
+
 * {
   box-sizing: border-box;
 }
@@ -21,13 +23,6 @@ body {
   font-family: Merriweather, sans-serif;
   color: #545252;
   line-height: 1.8;
-  // line-height: (5px * 5);
-  // @media (min-width: 500px) {
-  //   line-height: 5vw;
-  // }
-  // @media (min-width: 950px) {
-  //   line-height: (9.5px * 5);
-  // }
 }
 
 *[hidden] {
@@ -38,7 +33,7 @@ body {
 
 button,
 .btn {
-  font-family: inherit;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   border: none;
   padding: 10px 20px;
   background: #69A0FC;
@@ -56,13 +51,6 @@ label {
   margin-bottom: 5px;
 }
 
-input {
-  font-size: inherit;
-  border: 1px solid #DDD;
-  border-radius: 3px;
-  margin-top: 5px;
-  padding: 5px;
-}
 
 /*********************************************************
 * Color demo
@@ -93,11 +81,11 @@ input {
 */
 .download {
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  background: #69A0FC;
+  background: fade(#69A0FC, 50%);
   height: 60px;
   padding: 5px;
   flex-shrink: 0;
@@ -117,8 +105,8 @@ input {
   }
   .btn {
     font-size: 14px;
-    background: white;
-    color: #69A0FC;
+    // background: white;
+    // color: #69A0FC;
   }
 }
 
@@ -132,25 +120,52 @@ input {
   width: 500px;
   flex-shrink: 0;
   line-height: 1.5;
+  background: @sidebarBg;
+
+  h3 {
+    color: fade(white, 80%);
+    font-weight: 400;
+  }
+
+  input {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    font-size: inherit;
+    border: none;
+    background: darken(@sidebarBg, 3%);
+    color: white;
+    border-radius: 3px;
+    margin-top: 5px;
+    padding: 10px;
+    transition: all 0.2s ease-in-out;
+    &:focus {
+      outline: none;
+      background: white;
+      color: @sidebarBg;
+    }
+  }
+
+  code {
+    background: none;
+    padding: 0;
+    color: fade(white, 80%);
+  }
 }
 .color-wrapper {
   margin-right: -2%;
+}
+.form-group {
   .cf;
 }
 .color {
   float: left;
   width: 45%;
   margin-right: 5%;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   input {
     width: 100%;
   }
 }
 
-
-/*********************************************************
-* Preview
-*/
 .color-demo {
   input {
     opacity: 0;
@@ -168,6 +183,40 @@ input {
   vertical-align: middle;
   margin-right: 10px;
 }
+
+
+/*********************************************************
+* Preview
+*/
+
+.preview {
+  padding: 40px 30px 40px 60px;
+  h1, h2, h3, h4, p {
+    max-width: 600px;
+    margin-top: 20px 0;
+  }
+
+  h1 {
+    line-height: 1.3;
+  }
+
+  h2 {
+    margin-top: 60px;
+    font-size: 28px;
+  }
+
+  h3 {
+    font-weight: normal;
+    color: #999;
+  }
+
+  p {
+  line-height: 1.9;
+  }
+
+}
+
+
 
 /*********************************************************
 * Typeset
