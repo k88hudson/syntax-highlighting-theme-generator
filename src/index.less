@@ -1,4 +1,5 @@
 @sidebarBg: #282A36;
+@sidebarWidth: 520px;
 
 * {
   box-sizing: border-box;
@@ -51,6 +52,13 @@ label {
   margin-bottom: 5px;
 }
 
+code {
+  background: @inlineCodeBackground;
+  color: @inlineCodeColor;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 0.8em;
+}
+
 
 /*********************************************************
 * Color demo
@@ -77,45 +85,52 @@ label {
 }
 
 /*********************************************************
+* Download
+*/
+
+
+.download {
+  position: fixed;
+  bottom: -70px;
+  height: 68px;
+  left: @sidebarWidth;
+  right: 0;
+  z-index: 1000;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background: fade(white, 75%);
+  // opacity: 0;
+  // visibility: hidden;
+
+  transition: all 0.2s ease-in-out;
+
+  &.download-on {
+    // opacity: 1;
+    // visibility: visible;
+    bottom: 0;
+  }
+}
+
+/*********************************************************
 * Sidebar
 */
 
 .sidebar {
-
   position: relative;
-  padding: 20px;
-  width: 500px;
+  width: @sidebarWidth;
   flex-shrink: 0;
   line-height: 1.5;
   background: @sidebarBg;
   height: 100%;
   overflow: hidden;
-  transition: padding 0.2s ease-in-out;
-  &.download-on {
-    padding-top: 40px;
-    .download {
-      opacity: 1;
-      visibility: visible;
-    }
-  }
 
-  .download {
-    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
-    opacity: 0;
-    visibility: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    background: fade(@sidebarBg, 90%);
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 10px;
-  }
 
   .color-wrapper {
     height: 100%;
+    padding: 20px 30px 40px;
+    overflow-x: hidden;
     overflow-y: scroll;
   }
 
@@ -148,11 +163,10 @@ label {
     color: fade(white, 80%);
   }
 }
-.color-wrapper {
-  margin-right: -2%;
-}
+
 .form-group {
   .cf;
+  margin-right: -5%;
 }
 .color {
   float: left;
@@ -188,13 +202,14 @@ label {
 */
 
 .preview {
-  padding: 40px 30px 40px 60px;
+  position: relative;
+  padding: 40px 30px 40px 80px;
   h1, h2, h3, h4, p {
     max-width: 600px;
     margin-top: 20px 0;
   }
 
-  h1 {
+  h1, h2 {
     line-height: 1.3;
   }
 

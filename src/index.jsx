@@ -15,7 +15,8 @@ Object.keys(defaultTheme).forEach(key => {
   });
 });
 
-var lessString = require('raw!../node_modules/react-markdocs/src/markdocs.less');
+var headerString = '/* Generated with http://k88hudson.github.io/react-markdocs-example/www/ */\n';
+var lessString = headerString + require('raw!../node_modules/react-markdocs/src/markdocs.less');
 
 function createColorVariableString(colors) {
   return colorClasses.map(color => {
@@ -80,24 +81,31 @@ var App = React.createClass({
       this.updateColors();
     };
   },
+  downloadURL: function () {
+    return 'data:application/octet-stream;charset=utf-8,' + encodeURIComponent(this.state.css);
+  },
   render: function () {
     return (<div className="container">
       <style>{this.state.css}</style>
-      <div className={'sidebar' + (this.state.css ? ' download-on' : '')} onClick={this.scrollToExample}>
-        <div className="download">
-          <a className="btn" href={'data:application/octet-stream;charset=utf-8,' + encodeURI(this.state.css)}>Download CSS</a>
+      <div className="sidebar" onClick={this.scrollToExample}>
+        <div className="color-wrapper">
+          {Object.keys(defaultTheme).map(group => {
+            return (<div className="form-group">
+              <h3>{group}</h3>
+              {Object.keys(defaultTheme[group]).map(color => {
+                return <ColorInput label={color} value={this.state.colors[color]} onChange={this.updateSwatch(color)} />
+              })}
+            </div>);
+          })}
+          <a hidden={!this.state.css} className="btn" href={this.downloadURL()}>Download CSS</a>
         </div>
-        <div className="color-wrapper">{Object.keys(defaultTheme).map(group => {
-          return (<div className="form-group">
-            <h3>{group}</h3>
-            {Object.keys(defaultTheme[group]).map(color => {
-              return <ColorInput label={color} value={this.state.colors[color]} onChange={this.updateSwatch(color)} />
-            })}
-          </div>);
-        })}</div>
       </div>
+
       <div ref="preview" className="preview">
         <Markdown prism source={require('./docs/main.md')} options={{html: true}} postProcess={(html) => typeset(html, {ligatures: false})} />
+        <div className={'download' + (this.state.css ? ' download-on' : '')} >
+          <a className="btn" download="prism-theme.css" href={this.downloadURL()}>Download CSS</a>
+        </div>
       </div>
     </div>);
   }
