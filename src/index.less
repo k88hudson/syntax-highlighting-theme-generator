@@ -77,50 +77,48 @@ label {
 }
 
 /*********************************************************
-* Download footer
-*/
-.download {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  background: fade(#69A0FC, 50%);
-  height: 60px;
-  padding: 5px;
-  flex-shrink: 0;
-  font-weight: inherit;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  span {
-    flex-grow: 1;
-  }
-  a:not(.btn) {
-    color: inherit;
-    &:hover {
-      color: #FFB400;
-    }
-  }
-  .btn {
-    font-size: 14px;
-    // background: white;
-    // color: #69A0FC;
-  }
-}
-
-
-/*********************************************************
 * Sidebar
 */
 
 .sidebar {
-  padding: 30px;
+
+  position: relative;
+  padding: 20px;
   width: 500px;
   flex-shrink: 0;
   line-height: 1.5;
   background: @sidebarBg;
+  height: 100%;
+  overflow: hidden;
+  transition: padding 0.2s ease-in-out;
+  &.download-on {
+    padding-top: 40px;
+    .download {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  .download {
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background: fade(@sidebarBg, 90%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+  }
+
+  .color-wrapper {
+    height: 100%;
+    overflow-y: scroll;
+  }
+
 
   h3 {
     color: fade(white, 80%);

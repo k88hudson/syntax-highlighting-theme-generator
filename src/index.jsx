@@ -83,8 +83,8 @@ var App = React.createClass({
   render: function () {
     return (<div className="container">
       <style>{this.state.css}</style>
-      <div className="sidebar" onClick={this.scrollToExample}>
-        <div hidden={!this.state.css}>
+      <div className={'sidebar' + (this.state.css ? ' download-on' : '')} onClick={this.scrollToExample}>
+        <div className="download">
           <a className="btn" href={'data:application/octet-stream;charset=utf-8,' + encodeURI(this.state.css)}>Download CSS</a>
         </div>
         <div className="color-wrapper">{Object.keys(defaultTheme).map(group => {
@@ -99,9 +99,6 @@ var App = React.createClass({
       <div ref="preview" className="preview">
         <Markdown prism source={require('./docs/main.md')} options={{html: true}} postProcess={(html) => typeset(html, {ligatures: false})} />
       </div>
-      <footer className="download" hidden={true}>
-        <a className="btn" href={'data:application/octet-stream;charset=utf-8,' + encodeURI(this.state.css)}>Download CSS</a>
-      </footer>
     </div>);
   }
 });
