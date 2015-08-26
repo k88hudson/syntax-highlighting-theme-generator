@@ -68,7 +68,7 @@ var App = React.createClass({
       });
     }, 500);
 
-    // this.updateColors();
+    this.updateColors();
 
   },
   scrollToExample: function () {
