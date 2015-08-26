@@ -54,7 +54,8 @@ var App = React.createClass({
   getInitialState: function () {
     return {
       colors: allColors,
-      css: ''
+      css: '',
+      firstUpdate: true
     };
   },
   componentDidMount: function () {
@@ -75,6 +76,10 @@ var App = React.createClass({
   },
   updateSwatch: function (color) {
     return (e) => {
+      if (this.state.firstUpdate) {
+        this.scrollToExample();
+        this.setState({firstUpdate: false});
+      }
       var colors = this.state.colors;
       colors[color] = e.target.value;
       this.setState({colors});
@@ -87,7 +92,7 @@ var App = React.createClass({
   render: function () {
     return (<div className="container">
       <style>{this.state.css}</style>
-      <div className="sidebar" onClick={this.scrollToExample}>
+      <div className="sidebar">
         <div className="color-wrapper">
           {Object.keys(defaultTheme).map(group => {
             return (<div className="form-group">
