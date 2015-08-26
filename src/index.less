@@ -52,12 +52,15 @@ label {
   margin-bottom: 5px;
 }
 
-code {
+:not(pre) > code {
   background: @inlineCodeBackground;
   color: @inlineCodeColor;
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   font-size: 0.8em;
+  padding: .1em .3em;
+  border-radius: .3em;
 }
+
 
 a {
   background: #FFFAEB;
@@ -219,7 +222,7 @@ a {
 
 .preview {
   position: relative;
-  padding: 40px 30px 40px 80px;
+  padding: 40px 30px 60px 80px;
   h1, h2, h3, h4, p {
     max-width: 600px;
     margin-top: 20px 0;
