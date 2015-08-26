@@ -44,6 +44,9 @@ button,
   text-decoration: none;
   display: inline-block;
   box-shadow: 0px 2px 0px darken(#69A0FC, 10%);
+  &:hover {
+    background: lighten(#69A0FC, 5%);
+  }
 }
 
 label {
@@ -126,6 +129,25 @@ a {
     bottom: 0;
   }
 }
+
+// Thanks @flukeout!
+.shake {
+  -webkit-animation: shake .1s 5;
+  -moz-animation: shake .1s 5;
+}
+@-webkit-keyframes shake {
+  0%   { -webkit-transform: translateX(0); }
+  25% {  -webkit-transform: translateX(-5px); }
+  50% {  -webkit-transform: translateX(0); }
+  75% {  -webkit-transform: translateX(5px); }
+}
+@keyframes shake {
+  0%   { transform: translateX(0); }
+  25% {  transform: translateX(-5px); }
+  50% {  transform: translateX(0); }
+  75% {  transform: translateX(5px); }
+}
+
 
 /*********************************************************
 * Sidebar

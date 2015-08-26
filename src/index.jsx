@@ -7,6 +7,9 @@ var defaultTheme = require('./default-theme');
 var colorClasses = [];
 var allColors = {};
 
+// How many edits until we shake?
+var SHAKE_COUNT = 10;
+
 Object.keys(defaultTheme).forEach(key => {
   var group = defaultTheme[key];
   Object.keys(group).forEach(color => {
@@ -57,14 +60,25 @@ var App = React.createClass({
     return {
       colors: allColors,
       css: '',
-      firstUpdate: true
+      updateCount: 0
     };
   },
   componentDidMount: function () {
 
     this.updateColors = throttle(() => {
       renderStyles(this.state.colors, (css) => {
-        this.setState({css});
+        var updateCount = this.state.updateCount;
+
+        // Scroll to examples on first user update
+        if (updateCount === 1) this.scrollToExample();
+
+        // Shake
+        if (updateCount % SHAKE_COUNT === 0) {
+          this.setState({shakeOn: true});
+          setTimeout(() => this.setState({shakeOn: false}), 1000);
+        }
+
+        this.setState({css, updateCount: updateCount + 1});
       });
     }, 500);
 
@@ -78,10 +92,6 @@ var App = React.createClass({
   },
   updateSwatch: function (color) {
     return (e) => {
-      if (this.state.firstUpdate) {
-        this.scrollToExample();
-        this.setState({firstUpdate: false});
-      }
       var colors = this.state.colors;
       colors[color] = e.target.value;
       this.setState({colors});
@@ -104,14 +114,13 @@ var App = React.createClass({
               })}
             </div>);
           })}
-          <a hidden={!this.state.css} className="btn" href={this.downloadURL()}>Download CSS</a>
         </div>
       </div>
 
       <div ref="preview" className="preview">
         <Markdown prism source={require('./docs/main.md')} options={{html: true}} postProcess={(html) => typeset(html, {ligatures: false})} />
         <div className={'download' + (this.state.css ? ' download-on' : '')} >
-          <a className="btn" download="prism-theme.css" href={this.downloadURL()}>Download CSS</a>
+          <a className={'btn' + (this.state.shakeOn ? ' shake' : '')} download="prism-theme.css" href={this.downloadURL()}>Download CSS</a>
         </div>
       </div>
     </div>);
