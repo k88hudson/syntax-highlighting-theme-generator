@@ -40,10 +40,12 @@ function renderStyles(colors, callback) {
 var ColorInput = React.createClass({
   render: function () {
     return (<div className="color">
-      <div className="color-demo" style={{background: this.props.value}}>
-         <input type="color" value={this.props.value} onChange={this.props.onChange} />
+      <div className="title">
+        <div className="color-demo" style={{background: this.props.value}}>
+          <input type="color" value={this.props.value} onChange={this.props.onChange} />
+        </div>
+        <code>@{this.props.label}</code>
       </div>
-      <code>@{this.props.label}</code>
       <input type="type" value={this.props.value} onChange={throttle(this.props.onChange, 100)} />
     </div>);
   }
