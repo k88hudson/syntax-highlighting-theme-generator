@@ -1,7 +1,8 @@
 var React = require('react/addons');
+var Prism = require('prism');
+var less = require('less');
 var {Markdown} = require('react-markdocs');
 var throttle = require('lodash.throttle');
-var typeset = require('typeset');
 
 var themeInfo = require('./lib/theme-info');
 var {renderStyles} = require('./lib/render-utils');
@@ -67,6 +68,9 @@ var App = React.createClass({
       this.updateColors();
     };
   },
+  nicerType: function (html) {
+    return html;
+  },
   downloadURL: function () {
     return 'data:application/octet-stream;charset=utf-8,' + encodeURIComponent(this.state.css);
   },
@@ -95,7 +99,7 @@ var App = React.createClass({
           prism
           source={require('./lib/documentation.md')}
           options={{html: true}}
-          postProcess={(html) => typeset(html, {ligatures: false})} />
+          postProcess={this.nicerType} />
         <div className={'download' + (this.state.css ? ' download-on' : '')} >
           <a
             className={'btn' + (this.state.shakeOn ? ' shake' : '')}

@@ -10,10 +10,10 @@
     "prestart": "npm run prebuild",
     "build:static": "cpx \"src/static/**/*\" www",
     "watch:static": "npm run build:static -- -w",
-    "build:js": "webpack",
-    "watch:js": "npm run build:js -- --watch",
+    "build:js": "webpack -p",
+    "watch:js": "webpack -d --watch",
     "build:css": "npm run watch:css -- --no-watch",
-    "watch:css": "autoless --source-map src www",
+    "watch:css": "autoless --autoprefix \"last 2 versions\" --source-map src www",
     "server": "live-server www --port=8888"
   },
   "author": "k88hudson",
@@ -21,8 +21,7 @@
   "dependencies": {
     "lodash.throttle": "3.0.4",
     "react": "0.13.3",
-    "react-markdocs": "https://github.com/k88hudson/react-markdocs.git#811c16cc2b28f840bfdb6702501fbd462b11011a",
-    "typeset": "https://github.com/k88hudson/Typeset.git#e147b6e7af7264da7f9c563cc4282773aeed6829"
+    "react-markdocs": "https://github.com/k88hudson/react-markdocs.git#811c16cc2b28f840bfdb6702501fbd462b11011a"
   },
   "engines": {
     "npm": ">=2.0.0"
