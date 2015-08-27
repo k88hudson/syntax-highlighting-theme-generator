@@ -1,16 +1,14 @@
 {
-  "name": "react-markdocs-example",
-  "version": "0.0.0",
-  "description": "",
+  "name": "syntax-highlighting-theme-generator",
+  "version": "0.0.1",
+  "description": "A theme generator for javascript syntax highlighters",
   "main": "index.js",
   "scripts": {
     "build": "npm-run-all build:**",
     "start": "npm run build && npm-run-all --parallel server watch:**",
-    "test": "mocha-phantomjs -s loadImages=false ./www/tests.html",
     "prebuild": "rimraf www && mkdirp www",
     "prestart": "npm run prebuild",
     "build:static": "cpx \"src/static/**/*\" www",
-    "build:tests": "cpx \"node_modules/mocha/mocha*\" www/lib",
     "watch:static": "npm run build:static -- -w",
     "build:js": "webpack",
     "watch:js": "npm run build:js -- --watch",
@@ -21,10 +19,10 @@
   "author": "k88hudson",
   "license": "MPL-2.0",
   "dependencies": {
-    "lodash.throttle": "^3.0.4",
-    "react": "^0.13.3",
-    "react-markdocs": "https://github.com/k88hudson/react-markdocs.git",
-    "typeset": "https://github.com/k88hudson/Typeset.git"
+    "lodash.throttle": "3.0.4",
+    "react": "0.13.3",
+    "react-markdocs": "https://github.com/k88hudson/react-markdocs.git#811c16cc2b28f840bfdb6702501fbd462b11011a",
+    "typeset": "https://github.com/k88hudson/Typeset.git#e147b6e7af7264da7f9c563cc4282773aeed6829"
   },
   "engines": {
     "npm": ">=2.0.0"
@@ -40,10 +38,7 @@
     "live-server": "^0.7.1",
     "mkdirp": "^0.5.0",
     "mocha": "^2.2.5",
-    "mocha-phantomjs": "^3.6.0",
     "npm-run-all": "^1.2.4",
-    "phantomjs": "^1.9.7-15",
-    "phantomjs-polyfill": "0.0.1",
     "rimraf": "^2.3.3",
     "should": "^7.0.4",
     "webpack": "^1.9.4"

@@ -1,0 +1,197 @@
+/* http://k88hudson.github.io/react-markdocs */
+/**
+ * @author k88hudson
+ *
+ * Based on prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+@fontSize: 13px;
+@textShadow: none;
+@fontFamily: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+@lineHeight: 1.5;
+@tabSize: 4;
+@paddingTop: 1em;
+
+@blockBackground: #F8F5EC;
+@baseColor: #5C6E74;
+
+@commentColor: #93A1A1; //
+@punctuationColor: #999; //
+@propertyColor: #905;
+@selectorColor: #690;
+@operatorColor: #a67f59;
+@operatorBg: hsla(0, 0%, 100%, .5);
+@variableColor: #e90;
+@functionColor: #DD4A68;
+@keywordColor: #07a;
+@selectedColor: #b3d4fc;
+
+@inlineCodeColor: #DB4C69;
+@inlineCodeBackground: #F9F2F4;
+
+@highlightBackground: #F7EBC6;
+@highlightAccent: #F7D87C;
+
+
+/*********************************************************
+* General
+*/
+
+pre[class*="language-"],
+code[class*="language-"] {
+  color: @baseColor;
+  font-size: @fontSize;
+  text-shadow: @textShadow;
+  font-family: @fontFamily;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: @lineHeight;
+
+  -moz-tab-size: @tabSize;
+  -o-tab-size: @tabSize;
+  tab-size: @tabSize;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+
+  &::selection,
+  &::mozselection {
+    text-shadow: none;
+    background: @selectedColor;
+  }
+
+  @media print {
+    text-shadow: none;
+  }
+
+}
+
+// Blocks
+pre[class*="language-"] {
+  padding: @paddingTop;
+  margin: .5em 0;
+  overflow: auto;
+
+  background: @blockBackground;
+}
+
+// Inline code
+:not(pre) > code[class*="language-"] {
+  padding: .1em .3em;
+  border-radius: .3em;
+  color: @inlineCodeColor;
+  background: @inlineCodeBackground;
+}
+
+/*********************************************************
+* Tokens
+*/
+
+.namespace {
+  opacity: .7;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: @commentColor;
+}
+
+.token.punctuation {
+  color: @punctuationColor;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: @propertyColor;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: @selectorColor;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: @operatorColor;
+  background: @operatorBg;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: @keywordColor;
+}
+
+.token.function {
+  color: @functionColor;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: @variableColor;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+/*********************************************************
+* Line highlighting
+*/
+
+pre[data-line] {
+  position: relative;
+}
+
+pre[class*="language-"] > code[class*="language-"] {
+  position: relative;
+  z-index: 1;
+}
+
+.line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: @paddingTop;
+
+  background: @highlightBackground;
+  box-shadow: inset 5px 0 0 @highlightAccent;
+
+  z-index: 0;
+
+  pointer-events: none;
+
+  line-height: inherit;
+  white-space: pre;
+}

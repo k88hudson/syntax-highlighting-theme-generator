@@ -1,15 +1,32 @@
+@bodyColor: #545252;
+@btnColor: #69A0FC;
 @sidebarBg: #282A36;
 @sidebarWidth: 520px;
+
+@import './lib/normalize';
+@import './less/prism';
 
 * {
   box-sizing: border-box;
 }
 
+html,
+body,
+#app {
+  height: 100%;
+}
+
+body {
+  font-family: Merriweather, sans-serif;
+  color: @bodyColor;
+  line-height: 1.8;
+}
+
 .cf() {
   &:before,
   &:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
+    content: " ";
+    display: table;
   }
 
   &:after {
@@ -17,42 +34,26 @@
   }
 }
 
-html, body, #app {height: 100%;}
-
-body {
-  margin: 0;
-  font-family: Merriweather, sans-serif;
-  color: #545252;
-  line-height: 1.8;
-}
-
 *[hidden] {
   display: none !important;
 }
 
-@import '../node_modules/react-markdocs/src/markdocs';
 
 button,
 .btn {
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   border: none;
   padding: 10px 20px;
-  background: #69A0FC;
+  background: @btnColor;
   color: white;
   border-radius: 3px;
   font-size: inherit;
   text-decoration: none;
   display: inline-block;
-  box-shadow: 0px 2px 0px darken(#69A0FC, 10%);
+  box-shadow: 0px 2px 0px darken(@btnColor, 10%);
   &:hover {
-    background: lighten(#69A0FC, 5%);
+    background: lighten(@btnColor, 5%);
   }
-}
-
-label {
-  color: #999;
-  display: block;
-  margin-bottom: 5px;
 }
 
 :not(pre) > code {
@@ -63,7 +64,6 @@ label {
   padding: .1em .3em;
   border-radius: .3em;
 }
-
 
 a {
   background: #FFFAEB;
@@ -105,7 +105,6 @@ a {
 * Download
 */
 
-
 .download {
   position: fixed;
   bottom: -70px;
@@ -118,14 +117,9 @@ a {
   align-items: center;
   justify-content: flex-end;
   background: fade(white, 75%);
-  // opacity: 0;
-  // visibility: hidden;
-
   transition: all 0.2s ease-in-out;
 
   &.download-on {
-    // opacity: 1;
-    // visibility: visible;
     bottom: 0;
   }
 }
@@ -162,14 +156,12 @@ a {
   height: 100%;
   overflow: hidden;
 
-
   .color-wrapper {
     height: 100%;
     padding: 20px 30px 40px;
     overflow-x: hidden;
     overflow-y: scroll;
   }
-
 
   h3 {
     color: fade(white, 80%);
@@ -269,32 +261,3 @@ a {
   }
 
 }
-
-
-
-/*********************************************************
-* Typeset
-*/
-
-
-/* Small caps */
-.small-caps {font-family: Merriweather, serif}
-
-/* Double quote (") marks */
-.pull-double{margin-left:-.6em}
-.push-double{margin-right:.38em}
-
-/* Single quote (') marks */
-.pull-single{margin-left:-.15em}
-.push-single{margin-right:.15em}
-
-/* Optical margin alignment for particular letters */
-.pull-T, .pull-V, .pull-W, .pull-Y {margin-left: -0.14em}
-.push-T, .push-V, .push-W, .push-Y {margin-right: 0.14em}
-
-.pull-O, .pull-C, .pull-o, .pull-c {margin-left: -0.04em}
-.push-O, .push-C, .push-o, .push-c {margin-right: 0.04em}
-
-.pull-A {margin-left: -0.03em}
-.push-A {margin-right: 0.03em}
-

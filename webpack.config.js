@@ -1,14 +1,13 @@
-var jsSrc = __dirname + '/src';
-var tests = __dirname + '/tests';
+var path = require('path');
+var jsSrc = path.join(__dirname, '/src');
 
 module.exports = {
   entry: {
-    index: jsSrc + '/index.jsx',
-    tests: tests + '/index.jsx'
+    index: path.join(jsSrc, '/index.jsx')
   },
-  devtool: 'source-map', // To support Firefox, switch to exec
+  devtool: 'source-map',
   output: {
-    path: __dirname + '/www',
+    path: path.join(__dirname, '/www'),
     filename: '[name].bundle.js'
   },
   module: {
@@ -16,7 +15,7 @@ module.exports = {
       {
         test: /\.js$/,
         loaders:  ['babel-loader'],
-        include: [jsSrc, tests, __dirname + '/node_modules/react-composable-form']
+        include: [jsSrc]
       },
       {
         test: /\.md$/,
@@ -25,7 +24,7 @@ module.exports = {
       {
         test: /\.jsx$/,
         loaders:  ['babel-loader', 'jsx-loader'],
-        include: [jsSrc, tests, __dirname + '/node_modules/react-composable-form']
+        include: [jsSrc]
       },
       {
         test: /\.json$/,

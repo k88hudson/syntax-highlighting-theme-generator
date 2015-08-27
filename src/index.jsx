@@ -3,42 +3,11 @@ var {Markdown} = require('react-markdocs');
 var throttle = require('lodash.throttle');
 var typeset = require('typeset');
 
-var defaultTheme = require('./default-theme');
-var colorClasses = [];
-var allColors = {};
+var themeInfo = require('./lib/theme-info');
+var {renderStyles} = require('./lib/render-utils');
 
-// How many edits until we shake?
+// How many edits until we shake the button?
 var SHAKE_COUNT = 10;
-
-Object.keys(defaultTheme).forEach(key => {
-  var group = defaultTheme[key];
-  Object.keys(group).forEach(color => {
-    colorClasses.push(color);
-    allColors[color] = group[color];
-  });
-});
-
-var headerString = '/* Generated with http://k88hudson.github.io/react-markdocs-example/www/ */\n';
-var lessString = headerString + require('raw!../node_modules/react-markdocs/src/markdocs.less');
-
-function createColorVariableString(colors) {
-  return colorClasses.map(color => {
-    return `@${color}: ${colors[color]};`;
-  }).join('\n');
-}
-
-function renderStyles(colors, callback) {
-
-  var str = lessString;
-  str = str + '\n\n' + createColorVariableString(colors);
-
-  window.less.render(str)
-    .then(function (output) {
-      callback(output.css);
-    }, function (err) {
-      console.log(err);
-    });
-}
 
 var ColorInput = React.createClass({
   render: function () {
@@ -58,7 +27,7 @@ var App = React.createClass({
   mixins: [React.addons.LinkedStateMixin],
   getInitialState: function () {
     return {
-      colors: allColors,
+      colors: themeInfo.colors,
       css: '',
       updateCount: 0
     };
@@ -106,11 +75,15 @@ var App = React.createClass({
       <style>{this.state.css}</style>
       <div className="sidebar">
         <div className="color-wrapper">
-          {Object.keys(defaultTheme).map(group => {
-            return (<div className="form-group">
+          {Object.keys(themeInfo.sections).map(group => {
+            return (<div key={group} className="form-group">
               <h3>{group}</h3>
-              {Object.keys(defaultTheme[group]).map(color => {
-                return <ColorInput label={color} value={this.state.colors[color]} onChange={this.updateSwatch(color)} />
+              {Object.keys(themeInfo.sections[group]).map(color => {
+                return (<ColorInput
+                  key={color}
+                  label={color}
+                  value={this.state.colors[color]}
+                  onChange={this.updateSwatch(color)} />);
               })}
             </div>);
           })}
@@ -118,9 +91,17 @@ var App = React.createClass({
       </div>
 
       <div ref="preview" className="preview">
-        <Markdown prism source={require('./docs/main.md')} options={{html: true}} postProcess={(html) => typeset(html, {ligatures: false})} />
+        <Markdown
+          prism
+          source={require('./lib/documentation.md')}
+          options={{html: true}}
+          postProcess={(html) => typeset(html, {ligatures: false})} />
         <div className={'download' + (this.state.css ? ' download-on' : '')} >
-          <a className={'btn' + (this.state.shakeOn ? ' shake' : '')} download="prism-theme.css" href={this.downloadURL()}>Download CSS</a>
+          <a
+            className={'btn' + (this.state.shakeOn ? ' shake' : '')}
+            download="prism-theme.css"
+            href={this.downloadURL()}>
+            Download CSS</a>
         </div>
       </div>
     </div>);
