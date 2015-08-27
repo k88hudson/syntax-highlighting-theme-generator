@@ -3,7 +3,7 @@
 ### Forget trying to memorize class names and visualise hex colors. Writing a custom theme for your favourite syntax highlighter doesn't have to be hard!
 
 
-Just edit the values on the left and press the **Download CSS** button when you're done. You can also view the [source .less file](https://github.com/k88hudson/react-markdocs/blob/master/src/markdocs.less) if you're into that too.
+Just edit the values on the left and press the **Download CSS** button when you're done. You can also view the [source .less file](https://github.com/k88hudson/syntax-highlighting-theme-generator/blob/master/src/less/prism.less) if you're into that too.
 
 *Currently this tool only supports syntax highlighting for [Prism.js](http://prismjs.com), but I'm planning to add more in the near future.*
 
