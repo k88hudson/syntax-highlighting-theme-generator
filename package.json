@@ -38,6 +38,7 @@
     "mkdirp": "^0.5.0",
     "mocha": "^2.2.5",
     "npm-run-all": "^1.2.4",
+    "raw-loader": "^1.0.0",
     "rimraf": "^2.3.3",
     "should": "^7.0.4",
     "webpack": "^1.9.4"
